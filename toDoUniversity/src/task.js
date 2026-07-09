@@ -1,17 +1,31 @@
 import {Project} from "./project.js";
     class Task{
-    constructor(taskName,taskDescription,taskDate,taskTime,taskCompleted,taskProjectName,taskPriority){
+        taskName;
+        taskDescription;
+        taskDate;
+        taskHour;
+        taskMinute;
+        taskCompleted;
+        taskProjectName;
+        taskPriority;
+        taskDay;
+        taskMonth;
+        taskyear;
+    constructor(taskName,taskDescription,taskDay,taskMonth,taskYear,k,taskHour,taskMinute,taskCompleted,taskProjectName,taskPriority){
         this.taskName=taskName;
         this.taskDescription=taskDescription;
-        this.taskDate=taskDate;
-        this.taskTime=taskTime;
+        this.taskDay=taskDay;
+        this.taskMonth=taskMonth;
+        this.taskYear=taskYear;
+        this.taskHour=taskHour;
+        this.taskMinute=taskMinute;
         this.taskCompleted=taskCompleted;
         this.taskProjectName=ptaskProjectName;
         this.taskPriority=taskPriority;
     }
 
     
-     setTaskCompleted(taskCompletedValue) {
+     changeTaskCompleted(taskCompletedValue) {
         if(taskCompletedValue){
             this.taskCompleted=true;
         }
@@ -19,7 +33,7 @@ import {Project} from "./project.js";
             this.taskCompleted=false;
         }
     }
-    setTaskPriority(taskPriorityValue){
+    changeTaskPriority(taskPriorityValue){
         this.taskPriority=taskPriorityValue;
     }
     setDate(taskDateValue){
