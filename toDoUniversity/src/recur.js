@@ -1,7 +1,7 @@
 import { addDays ,addWeeks,addMonths} from "date-fns";
 import {Task} from "./task.js";
 import {Project} from "./project.js";
-function createRecurringTask(orginalTask,startingDate,daysAdded,weeksAdded,monthsAdded,endingDate){
+function createRecurringTask(originalTask,startingDate,daysAdded,weeksAdded,monthsAdded,endingDate){
     let newTasks=[];
     let currentDate=startingDate;
     let currentTask=originalTask;

@@ -1,8 +1,9 @@
 import {Task} from "./task.js";
 import {Project } from "./project.js";
 import { createRecurringTask } from "./recur.js";
-import {currentTasks,projects,tasks} from "./createNew.js";
+import {currentTasks,projects,tasks,currentProjects,makeNewProject,makeNewTask} from "./createNew.js";
 import {sortTasksAlgo,sortTasks,filterTasks,removeTask} from "./manageTasks.js";
+import { format } from "date-fns";
 
 function showTasks(curredtTasks){
     
@@ -14,7 +15,7 @@ function showTasks(curredtTasks){
         taskHeading.innerText=`${currentTask.taskName} (${taskName.taskCompleted?"completed":"not completed"})`;
         taskArea.appendChild(taskHeading);
         let  taskDueDate=document.createElement("p");
-        taskDueDate.innerText=`Due ${currentTask.taskDate} at ${currentTask.task} at ${currentTask.taskHour}:${currentTask.taskMinute}`;
+        taskDueDate.innerText=`Due ${format(new Date(currentTask.taskYear,currentTask.taskMonth,currentTask.taskDay),"MMMM dd, yyyy")} at ${currentTask.task} at ${currentTask.taskHour}:${currentTask.taskMinute}`;
         taskArea.appendChild(taskDueDate);
         let taskInfoButton=document.createElement("button");
         taskInfoButton.innerText="More Info";
@@ -89,3 +90,25 @@ function showProjects(currentProjects){
     });
 }
 showTasks(sortTasks(currentTasks));
+let newProjectButton=document.querySelector(".new-project");
+let newProjectDialog=document.querySelector("#new-project-dialog");
+newProjectButton.addEventListener("click",(event)=>{
+    event.prreventDefault();
+    let newProjectForm=document.querySelector(".new-project-form");  
+    let newProjectSubmission=new FormData(newProjectForm);
+    createNewProject(newProjectSubmission);
+    let projectSelection=document.querySelector(".project-names");
+    let newProjectOption=document.createElement("option");
+    newProjectOption.innerText=newProjectSubmission.get("pro-name");
+    projectSelection.appendChild(newProjectOption);
+    newProjectDialog.closest();
+});
+let newTaskButton=document.querySelector(".new-task-button");
+let newTaskForm=document.querySelector(".new-task-form");
+let newTaskDialog=document.querySelector("#new-task-dialog");
+newTaskButton.addEventListener("click",(event)=>{
+    event.preventDeafult();
+    let newTaskSubmission=new FormData(newTaskForm);
+    makeNewTask(newTaskSubmission);
+    newTaskDialog.closest();
+});
