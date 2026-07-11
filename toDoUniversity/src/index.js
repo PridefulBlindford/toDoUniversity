@@ -9,7 +9,11 @@ currentTasks=JSON.parse(localStorage.getItem("tasks"));
 let currentProjects=[];
 currentProjects=JSON.parse(localStorage.getItem("projects"));
 function showTasks(currentTasks){
-    
+    if(document.querySelector(".tasks-area")!==null){
+        document.querySelector(".tasks-area").remove;
+    }    
+    let tasksArea=document.createElement("div");
+    tasksArea.setAttribute("class","tasks-area");
     let mainContent=document.querySelector(".main-content");
     currentTasks.forEach((currentTask)=>{
         let taskArea=document.createElement("div");
@@ -64,6 +68,7 @@ function showTasks(currentTasks){
     
 
     taskArea.appendChild(removeTaskButton);    
+    tasksArea.appendChild(taskArea);
     });
 }
 let projectDetails=document.querySelector(".project-details");
@@ -72,15 +77,17 @@ function showProjects(){
         document.querySelector(".project-area").remove;
     }
     let projectArea=document.createElement("div");
+    
     projectArea.setAttribute("class","project-area");
-    currentProjects.forEach((currentProject)=>{
+    for(let i=0;i<currentProjects.length;i++){
+
         let     newCurrentProject=document.createElement("button");
-        newCurrentProject.innerText=currentProject.projectName;
+        newCurrentProject.innerText=currentProjects[i].projectName;
         newCurrentProject.addEventListener("click",()=>{
-            showTasks(sortTasks(filterTasks(currentProject)));
+            showTasks(sortTasks(filterTasks(currentProjects[i])));
         });
         projectArea.appendChild(newCurrentProject);
-    });
+    }
     projectDetails.appendChild(projectArea);
 }
 
@@ -89,21 +96,24 @@ projectDetails.addEventListener("toggle",()=>{
         showProjects();
     }
 });
-let newProjectButton=document.querySelector(".new-project");
+let newProjectButton=document.querySelector(".new-project-button");
 let newProjectDialog=document.querySelector("#new-project-dialog");
 newProjectButton.addEventListener("click",(event)=>{
     event.preventDefault();
     let newProjectForm=document.querySelector(".new-project-form");  
     let newProjectSubmission=new FormData(newProjectForm);
+    
     makeNewProject(newProjectSubmission.get("pro-name"));
+    
+    
     let projectSelection=document.querySelector(".project-names");
     let newProjectOption=document.createElement("option");
     newProjectOption.innerText=newProjectSubmission.get("pro-name");
     projectSelection.appendChild(newProjectOption);
-    showProjects();
+    
     newProjectDialog.close();
 });
-let newTaskButton=document.querySelector(".new-task");
+let newTaskButton=document.querySelector(".new-task-button");
 let newTaskForm=document.querySelector(".new-task-form");
 let newTaskDialog=document.querySelector("#new-task-dialog");
 newTaskButton.addEventListener("click",(event)=>{
@@ -113,7 +123,7 @@ newTaskButton.addEventListener("click",(event)=>{
     newTaskDialog.close();
 });
 
-makeNewProject("classes");
+
 let showTasksArea=document.querySelector(".show-tasks-area");
 
 
@@ -124,4 +134,3 @@ showTasksButton.addEventListener("click",()=>{
     showTasks(sortTasks(currentTasks));
 });
 showTasksArea.appendChild(showTasksButton);
-console.log(currentProjects.length);
