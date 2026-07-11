@@ -11,7 +11,7 @@ import {Project} from "./project.js";
         taskDay;
         taskMonth;
         taskyear;
-    constructor(taskName,taskDescription,taskDay,taskMonth,taskYear,taskHour,taskMinute,taskCompleted,taskProjectNamtaskPriority){
+    constructor(taskName,taskDescription,taskDay,taskMonth,taskYear,taskHour,taskMinute,taskCompleted,taskProjectName,taskPriority){
         this.taskName=taskName;
         this.taskDescription=taskDescription;
         this.taskDay=taskDay;
@@ -20,7 +20,7 @@ import {Project} from "./project.js";
         this.taskHour=taskHour;
         this.taskMinute=taskMinute;
         this.taskCompleted=taskCompleted;
-        this.taskProjectName=ptaskProjectName;
+        this.taskProjectName=taskProjectName;
         this.taskPriority=taskPriority;
     }
 

@@ -1,59 +1,57 @@
 import {Task} from "./task.js";
 import {Project } from "./project.js";
 import { createRecurringTask } from "./recur.js";
-import {currentTasks,projects,tasks,currentProjects,makeNewProject,makeNewTask} from "./createNew.js";
+import {projects,tasks,makeNewProject,makeNewTask} from "./createNew.js";
 import {sortTasksAlgo,sortTasks,filterTasks,removeTask} from "./manageTasks.js";
 import { format } from "date-fns";
-
-function showTasks(curredtTasks){
+let currentTasks=[];
+currentTasks=JSON.parse(localStorage.getItem("tasks"));
+let currentProjects=[];
+currentProjects=JSON.parse(localStorage.getItem("projects"));
+function showTasks(currentTasks){
     
     let mainContent=document.querySelector(".main-content");
     currentTasks.forEach((currentTask)=>{
         let taskArea=document.createElement("div");
         taskArea.setAttribute("class",currentTask.taskName);
         let taskHeading=document.createElement("h3");
-        taskHeading.innerText=`${currentTask.taskName} (${taskName.taskCompleted?"completed":"not completed"})`;
+        taskHeading.innerText=`${currentTask.taskName} (${currentTask.taskCompleted?"completed":"not completed"})`;
         taskArea.appendChild(taskHeading);
         let  taskDueDate=document.createElement("p");
-        taskDueDate.innerText=`Due ${format(new Date(currentTask.taskYear,currentTask.taskMonth,currentTask.taskDay),"MMMM dd, yyyy")} at ${currentTask.task} at ${currentTask.taskHour}:${currentTask.taskMinute}`;
+        
+        taskDueDate.innerText=`Due ${format(new Date(currentTask.taskYear,currentTask.taskMonth,currentTask.taskDay),"MMMM dd, yyyy")} } at ${currentTask.taskHour}:${currentTask.taskMinute}`;
         taskArea.appendChild(taskDueDate);
-        let taskInfoButton=document.createElement("button");
-        taskInfoButton.innerText="More Info";
-        taskInfoButton.addEventListener("click",()=>{
-            let taskInfoArea=document.createElement("div");
-            taskInfoArea.setAttribute("class",`${currentTask.taskName}-info`);
-            moreInfoButton.innerText="Less Info";
-            let taskInfo=document.createElement("p");
-            taskInfo.innerText=`Description: ${currentTask.taskDescription}`;
-            taskInfoArea.appendChild(taskInfo);
-            let taskCompInfo=document.createElement("p");
-            taskCompInfo.innerText=`Task Completed: ${currentTask.taskCompleted?"yes":"no"}`;
-            taskHeading.innerText=`${currentTask.taskName} (${currentTask.taskCompleted?"completed":"not completed"})`;
-            taskInfoArea.appendChild(taskCompInfo);
-            let taskCompButton=document.createElement("button");
-            taskCompButton.innerText="Change Completion Status";
-            taskCompButton.addEventListener("click",()=>{
-                currentTask.changeTaskCompleted(currentTask.taskCompleted);
-                taskCompInfo.innerText=`Completed: ${currentTask.taskComepleted?"yes":"no"}`;
-            });
-            taskInfoArea.appendChild(taskCompButton);
-            let taskPriorityInfo=document.createElement("p");
-            taskPriorityInfo.innerText=`Priority Level: ${currentTask.taskPriority}`;
-            taskInfoArea.appendChild(taskPriorityInfo);
-            let taskPriorityButton=document.createElement("button");
-            taskPriorityButton.innerText="Change Priority Level";
-            taskPriorityButton.addEventListner("click",()=>{
-                let newPriorityLevel=parseInt(prompt("Enter a priority level",currentTask.taskPriority));
-                currentTask.changeTaskPriorityLevel(newPriorityLevel);
-                taskPriorityInfo.innerText=`Priority Level: ${currentTask.taskPriority}`;
-            });
-            taskInfoArea.appendChild(taskPriorityButton);
-            moreInfoButton.addEventListener("click",()=>{
-                document.querySelector(`.${currentTask.taskName}`).remove;
-            });
-            taskArea.appendChild(taskInfoArea);
-            
+        let taskInfoArea=document.createElement("details");
+        let infoText=document.createElement("summary");
+        moreInfo.innerText=`More info about ${currentTask.taskName}`;
+        taskInfoArea.appendChild(moreInfo);
+        let taskDescriptionInfo=document.createElement("p");
+        taskDescriptionInfo.innerText=`Task Description: ${currentTask.taskDescription}`;
+        taskInfoArea.appendChild(taskDescriptionInfo);
+        let taskCompletedInfo=document.createElement("p");
+        taskCompletedInfo.innerText=`Task Completed: ${currentTask.taskCompleted?"yes":"no"}`;
+        taskInfoArea.appendChild(taskCompletedInfo);
+        let taskCompButton=document.createElement("button");
+        taskCompButton.innerText="Change Task Completed Status";
+        taskCompButton.addEventListener("click",()=>{
+            currentTask.changeTaskCompleted();
+            taskCompletedInfo.innerText=`Task Completed: ${currentTask.taskCompleted?"yes":"no"}`;
         });
+        taskInfoArea.appendChild(taskCompButton);
+        let taskPriorityInfo=document.createElement("p");
+        taskPriorityInfo.innerText=`Task Priority Level: ${currentTask.taskPriority}`;
+        taskInfoArea.appendChild(taskPriorityInfo);
+        let taskPrioButton=document.createElement("button");
+        taskPrioButton.innerText="Change Task Priority Level";
+        taskPrioButton.addEventListener("click",()=>{
+            let prioLevelInput=parseInt(prompt("Please input a new priority level",currentTask.taskPriority));
+            currentTask.changePriorityLevel(prioLevelInput);
+            taskPriorityInfo.innerText=`Priority Level: ${currentTask.taskPriority}`;
+        });
+        taskInfoArea.appendChild(taskPrioButton);
+        taskArea.appendChild(taskInfoArea);
+
+
         let taskProjectInfo=document.createElement("p");
         taskProjectInfo.innerText=`Project: ${currentTask.taskProjectName}`;
         taskArea.appendChild(taskProjectinfo);
@@ -61,54 +59,69 @@ function showTasks(curredtTasks){
         removeTaskButton.innerText="Rmove Task";
         removeTaskButton.addEventListener("click",()=>{
             document.querySelector(`.${currentTask.taskName}`).remove;
-            showTasks(removeTask(currentTasks,currentTask.taskName))
+            showTasks(removeTask(currentTasks,currentTask.taskName));
             });
+    
 
-        
+    taskArea.appendChild(removeTaskButton);    
     });
 }
-function showProjects(currentProjects){
-    let projectView=document.querySelector(".view-projects");
-    let navArea=document.querySelector("nav");
-    let projectsArea=document.createElement("div");
-    projectsArea.setAttribute("class","current-projects");
-    projectView.addEventListener("click",()=>{
-        projectView.innerText="Hide Projects";
-        currentProjects.forEach((currentProject)=>{
-            let currentProjectButton=document.createElement("button");
-            currentProjectButton.innerText=currentProject.projectName;
-            currentProjectButton.addEventListener("click",()=>{
-                showTasks(filterTasks(currentProject));
-            });
-            projectsArea.appendChild(currentProjectButton);
-         });
-         pnavArea.appendChild(projectArea);
-         projectView.addEventListener("click",()=>{
-            document.querySelector(".current-projects").remove;
-            projectView.innerText="Show Projects";
-         });
+let projectDetails=document.querySelector(".project-details");
+function showProjects(){
+    if(document.querySelector(".project-area")!==null){
+        document.querySelector(".project-area").remove;
+    }
+    let projectArea=document.createElement("div");
+    projectArea.setAttribute("class","project-area");
+    currentProjects.forEach((currentProject)=>{
+        let     newCurrentProject=document.createElement("button");
+        newCurrentProject.innerText=currentProject.projectName;
+        newCurrentProject.addEventListener("click",()=>{
+            showTasks(sortTasks(filterTasks(currentProject)));
+        });
+        projectArea.appendChild(newCurrentProject);
     });
+    projectDetails.appendChild(projectArea);
 }
-showTasks(sortTasks(currentTasks));
+
+projectDetails.addEventListener("toggle",()=>{
+    if(projectDetails.open){
+        showProjects();
+    }
+});
 let newProjectButton=document.querySelector(".new-project");
 let newProjectDialog=document.querySelector("#new-project-dialog");
 newProjectButton.addEventListener("click",(event)=>{
-    event.prreventDefault();
+    event.preventDefault();
     let newProjectForm=document.querySelector(".new-project-form");  
     let newProjectSubmission=new FormData(newProjectForm);
-    createNewProject(newProjectSubmission);
+    makeNewProject(newProjectSubmission.get("pro-name"));
     let projectSelection=document.querySelector(".project-names");
     let newProjectOption=document.createElement("option");
     newProjectOption.innerText=newProjectSubmission.get("pro-name");
     projectSelection.appendChild(newProjectOption);
-    newProjectDialog.closest();
+    showProjects();
+    newProjectDialog.close();
 });
-let newTaskButton=document.querySelector(".new-task-button");
+let newTaskButton=document.querySelector(".new-task");
 let newTaskForm=document.querySelector(".new-task-form");
 let newTaskDialog=document.querySelector("#new-task-dialog");
 newTaskButton.addEventListener("click",(event)=>{
-    event.preventDeafult();
+    event.preventDefault();
     let newTaskSubmission=new FormData(newTaskForm);
     makeNewTask(newTaskSubmission);
-    newTaskDialog.closest();
+    newTaskDialog.close();
 });
+
+makeNewProject("classes");
+let showTasksArea=document.querySelector(".show-tasks-area");
+
+
+let showTasksButton=document.createElement("button");
+showTasksButton.innerText="Show tasks";
+showTasksButton.addEventListener("click",()=>{
+    showTasksArea.remove;
+    showTasks(sortTasks(currentTasks));
+});
+showTasksArea.appendChild(showTasksButton);
+console.log(currentProjects.length);

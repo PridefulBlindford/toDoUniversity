@@ -8,109 +8,121 @@
 <body>
     <header>
         <a href=".main-content">Skip to Main Content</a>
-        <button class="view-projects">View Projects</button>
+        <div>
+            <details class="project-details">
+                <summary>Projects</summary>
+            </details>
+        </div>
     </header>
     <main class="main-content">
-        <h1>Welcome to To Do Unviersity</h1>
+        <h1>Welcome to To Do University</h1>
         <p>Here you can set tasks and projects Below, you can see your current tasks and view by project above.</p>
         <h2>Current tasks</h2>
-        <button class="new-project" commandfor="new-project-dialog" command="show-modal">New Project</button>
-        <button class="new-task" commandfor="new-task-dialog" command="show-modal">New Task</button>
+        <div>
+            <button class="new-project" commandfor="new-project-dialog" command="show-modal">New Project</button>
+        </div>
+        <div>
+            <button class="new-task" commandfor="new-task-dialog" command="show-modal">New Task</button>
+        </div>
     <dialog id="new-project-dialog">
         <form action="" method="dialog" class="new-project-form">
             <div>
                 <label for="pro-name">Project Name (Required):</label>
                 <input type="text" name="pro-name" id="pro-name" required>
-            </div>
-            <button commandfor="new-project-dialog" command="close" class="new-project-button">Submit</button>
+                </div>
+                <button commandfor="new-project-dialog" command="close" class="new-project-button">Submit</button>
             </form>
-    </dialog>
-    <dialog id="new-task-dialog">
-        <form action="" method="dialog" class="new-task-form">
-            <fieldset>
-                <div>
-                    <label for="t-name">Task Name(required):</label>
-                    <input type="text" name="t-name" id="t-name" required>
+        </dialog>
+        <dialog id="new-task-dialog">
+            <form action="" method="dialog" class="new-task-form">
+                <fieldset>
+                    <div>
+                        <label for="t-name">Task Name(required):</label>
+                        <input type="text" name="t-name" id="t-name" required>
                 </div>
-                <div>
-                    <label for="t-description">Task Description(required):</label>
-                    <input type="text" name="t-description" id="t-description" required>
+                    <div>
+                        <label for="t-description">Task Description(required):</label>
+                        <input type="text" name="t-description" id="t-description" required>
                 </div>
-                <div>
-                    <label for="t-priority">Priority Level (required):</label>
-                    <input type="number" name="t-priority" id="t-priority" required>
+                    <div>
+                        <label for="t-priority">Priority Level (required):</label>
+                        <input type="number" name="t-priority" id="t-priority" required>
                 </div>
-                <div>
-                    <label for="t-completed">Has the task been completed (required)?</label>
-                    <input type="checkbox" name="t-completed" id="t-completed" required>
-                </div>
+                    <div>
+                        <label for="t-completed">Has the task been completed (required)?</label>
+                        <input type="checkbox" name="t-completed" id="t-completed" required>
+                    </div>
 
 
-            </fieldset>
-            <fieldset>
-                <div>
-                    <label for="t-month">Month the Task is Due (required):</label>
-                    <input type="number" name="t-month" id="t-month" min="0" max="11" required>
+                </fieldset>
+                <fieldset>
+                    <div>
+                        <label for="t-month">Month the Task is Due (required):</label>
+                        <input type="number" name="t-month" id="t-month" min="0" max="11" required>
                 </div>
-                <div>
-                    <label for="t-day">What day is the task due(required)?</label>
-                    <input type="number" name="t-day" id="t-day" min="1" max="31" required>
-                </div>
-                <div>
-                    <label for="t-year">What year is the task due (required)?</label>
-                    <input type="number" name="t-year" id="t-year" min="0" required>
-                </div>
-                <div>
-                    <label for="t-hour">What hour of the day is the task due (required)?</label>
-                    <input type="number" name="t-hour" id="t-hour" min="1" max="24" required>
-                </div>
-                <div>
-                    <label for="t-minute">What minute of the hour was the task due (required)?</label>
-                    <input type="number" name="t-minute" id="t-minute" min="0" max="59" required>
-                </div>
+                    <div>
+                        <label for="t-day">What day is the task due(required)?</label>
+                        <input type="number" name="t-day" id="t-day" min="1" max="31" required>
+                    </div>
+                    <div>
+                        <label for="t-year">What year is the task due (required)?</label>
+                        <input type="number" name="t-year" id="t-year" min="0" required>
+                    </div>
+                    <div>
+                        <label for="t-hour">What hour of the day is the task due (required)?</label>
+                        <input type="number" name="t-hour" id="t-hour" min="1" max="24" required>
+                    </div>
+                    <div>
+                        <label for="t-minute">What minute of the hour was the task due (required)?</label>
+                        <input type="number" name="t-minute" id="t-minute" min="0" max="59" required>
+                    </div>
 
-            </fieldset>
-            <fieldset>
-                <div>
-                    <label for="t-pro-name">What project is the task in (required)?</label>
-                    <select name="t-pro-name" required class="project-names">
-                        <option value="class">Class</option>
-                    </select>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div>
-                    <label for="t-recur">Does this taask recur(required)?</label>
-                    <input type="checkbok" name="t-recur" id="t-recur" required>
-                </div>
-                <div>
-                    <label for="t-day-recur">How many days until the next instance of the task?</label>
-                    <input type="number" name="t-day-recur" id="t-day-recur" min="0">
-                </div>
-                <div>
-                    <label for="t-week-recur">How many weeks until the next instance of the task?</label>
-                    <input type="number" name="t-week-recur" id="t-week-recur" min="0">
-                </div>
-                <div>
-                    <label for="t-month-recur">How many months until the next instance of the task?</label>
-                    <input type="number" name="t-month-recur" id="t-month-recur" min="0">
-                </div>
-                <div>
-                    <label for="t-month-end">What month does the recurring task end?</label>
-                    <input type="number" name="t-month-end" id="t-month-end" min="0" max="11">
-                </div>
-                <div>
-                    <label for="t-day-end">What day of the month does the recurring task end?</label>
-                    <input type="number" name="t-day-end" id="t-day-end" min="1" max="31">
-                </div>
-                <div>
-                    <label for="t-year-end">What year does the recurring task end?</label>
-                    <input type="number" name="t-year-end" id="t-year-end" min="0">
-                </div>
-</fieldset>
-<button commandfor="new-task-dialog" command="close" class="new-tas-button">Submit</button>
-        </form>
-    </dialog>
+                </fieldset>
+                <fieldset>
+                    <div>
+                        <label for="t-pro-name">What project is the task in (required)?</label>
+                        <select name="t-pro-name" required class="project-names" id="t-pro-name">
+                            <option value="class">Class</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div>
+                        <label for="t-recur">Does this taask recur(required)?</label>
+                        <input type="checkbox" name="t-recur" id="t-recur" required>
+                    </div>
+                    <div>
+                        <label for="t-day-recur">How many days until the next instance of the task?</label>
+                        <input type="number" name="t-day-recur" id="t-day-recur" min="0">
+                    </div>
+                    <div>
+                        <label for="t-week-recur">How many weeks until the next instance of the task?</label>
+                        <input type="number" name="t-week-recur" id="t-week-recur" min="0">
+                    </div>
+                    <div>
+                        <label for="t-month-recur">How many months until the next instance of the task?</label>
+                        <input type="number" name="t-month-recur" id="t-month-recur" min="0">
+                    </div>
+                    <div>
+                        <label for="t-month-end">What month does the recurring task end?</label>
+                        <input type="number" name="t-month-end" id="t-month-end" min="0" max="11">
+                    </div>
+                    <div>
+                        <label for="t-day-end">What day of the month does the recurring task end?</label>
+                        <input type="number" name="t-day-end" id="t-day-end" min="1" max="31">
+                        
+                    </div>
+                    <div>
+                        <label for="t-year-end">What year does the recurring task end?</label>
+                        <input type="number" name="t-year-end" id="t-year-end" min="0">
+                    </div>
+                </fieldset>
+                <button commandfor="new-task-dialog" command="close" class="new-tas-button">Submit</button>
+            </form>
+        </dialog>
+        <div class="show-tasks-area">
+            
+        </div>
     </main>
 </body>
 </html>

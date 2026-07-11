@@ -7,7 +7,7 @@ let secondTaskDate=new Date(taskYear,taskMonth,taskDay);
 return (secondTaskDate.getTime()-second.taskPriority)-(firstTaskDate.getTime()-firstTask.taskPriority);
 }
 function sortTasks(currentTasks){
-    return currentTasks.sort(sortTasksAlgo(a,b));
+    return currentTasks.sort((a,b)=>sortTasksAlgo(a,b));
 }
 function filterTasks(currentTasks,projectName){
     return currentTasks.filter((currentTask)=> currentTask.taskProjectName===projectName);
