@@ -10,7 +10,7 @@ let currentProjects=[];
 currentProjects=JSON.parse(localStorage.getItem("projects"));
 function showTasks(currentTasks){
     if(document.querySelector(".tasks-area")!==null){
-        document.querySelector(".tasks-area").remove;
+        document.querySelector(".tasks-area").remove();
     }    
     let tasksArea=document.createElement("div");
     tasksArea.setAttribute("class","tasks-area");
@@ -62,7 +62,7 @@ function showTasks(currentTasks){
         let removeTaskButton=document.createElement("button");
         removeTaskButton.innerText="Rmove Task";
         removeTaskButton.addEventListener("click",()=>{
-            document.querySelector(`.${currentTask.taskName}`).remove;
+            document.querySelector(`.${currentTask.taskName}`).remove();
             showTasks(removeTask(currentTasks,currentTask.taskName));
             });
     
@@ -74,17 +74,17 @@ function showTasks(currentTasks){
 let projectDetails=document.querySelector(".project-details");
 function showProjects(){
     if(document.querySelector(".project-area")!==null){
-        document.querySelector(".project-area").remove;
+        document.querySelector(".project-area").remove();
     }
     let projectArea=document.createElement("div");
     
     projectArea.setAttribute("class","project-area");
     for(let i=0;i<currentProjects.length;i++){
-
+console.log(currentProjects.length);
         let     newCurrentProject=document.createElement("button");
         newCurrentProject.innerText=currentProjects[i].projectName;
         newCurrentProject.addEventListener("click",()=>{
-            showTasks(sortTasks(filterTasks(currentProjects[i])));
+            showTasks(sortTasks(filterTaskscurrentTasks,(currentProjects[i].projectName)));
         });
         projectArea.appendChild(newCurrentProject);
     }
@@ -130,7 +130,7 @@ let showTasksArea=document.querySelector(".show-tasks-area");
 let showTasksButton=document.createElement("button");
 showTasksButton.innerText="Show tasks";
 showTasksButton.addEventListener("click",()=>{
-    showTasksArea.remove;
+    showTasksArea.remove();
     showTasks(sortTasks(currentTasks));
 });
 showTasksArea.appendChild(showTasksButton);
