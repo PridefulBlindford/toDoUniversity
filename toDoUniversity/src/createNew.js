@@ -7,7 +7,7 @@ let projects=[];
 
 function makeNewProject(newProjectName){
     let newCurrentProject=new Project(newProjectName);
-    projects=JSON.parse(localStorage.get("projects"))||[];
+    projects=JSON.parse(localStorage.getItem("projects"))||[];
     projects.push(newCurrentProject);
     localStorage.setItem("projects",JSON.stringify(projects));
 }

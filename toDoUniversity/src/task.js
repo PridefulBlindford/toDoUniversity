@@ -2,7 +2,7 @@ import {Project} from "./project.js";
     class Task{
         taskName;
         taskDescription;
-        taskDate;
+        
         taskHour;
         taskMinute;
         taskCompleted;
@@ -36,8 +36,6 @@ import {Project} from "./project.js";
     changeTaskPriority(taskPriorityValue){
         this.taskPriority=taskPriorityValue;
     }
-    setDate(taskDateValue){
-        this.taskDate=taskDateValue;
-    }
+    
 }
 export {Task};

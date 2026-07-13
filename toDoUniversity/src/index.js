@@ -9,6 +9,7 @@ currentTasks=JSON.parse(localStorage.getItem("tasks"));
 let currentProjects=[];
 currentProjects=JSON.parse(localStorage.getItem("projects"));
 function showTasks(currentTasks){
+
     if(document.querySelector(".tasks-area")!==null){
         document.querySelector(".tasks-area").remove();
     }    
@@ -64,17 +65,20 @@ function showTasks(currentTasks){
         removeTaskButton.innerText="Rmove Task";
         removeTaskButton.addEventListener("click",()=>{
             document.querySelector(`.${currentTask.taskName}`).remove();
-            showTasks(removeTask(currentTasks,currentTask.taskName));
+            currentTasks=removeTask(currentTasks,currentTask.taskName);
+            showTasks(currentTasks);
+            localStorage.setItem("tasks",JSON.stringify(currentTasks));
             });
     
 
     taskArea.appendChild(removeTaskButton);    
     tasksArea.appendChild(taskArea);
     });
+    mainContent.appendChild(tasksArea);
 }
 let projectDetails=document.querySelector(".project-details");
 function showProjects(){
-    console.log(JSON.parse(localStorage.getItem("projects")));
+    
     if(document.querySelector(".project-area")!==null){
         document.querySelector(".project-area").remove();
     }
@@ -87,7 +91,10 @@ function showProjects(){
         let     newCurrentProject=document.createElement("button");
         newCurrentProject.innerText=currentProjects[i].projectName;
         newCurrentProject.addEventListener("click",()=>{
-            showTasks(sortTasks(filterTaskscurrentTasks,(currentProjects[i].projectName)));
+            currentTasks=JSON.parse(localStorage.getItem("tasks"));
+            currentTasks=sortTasks(currentTasks);
+            currentTasks=filterTasks(currentTasks,currentProjects[i].projectName);
+            showTasks(currentTasks);
         });
         projectArea.appendChild(newCurrentProject);
     }
@@ -110,6 +117,7 @@ newProjectButton.addEventListener("click",(event)=>{
     makeNewProject(newProjectSubmission.get("pro-name"));
     
     
+    
     let projectSelection=document.querySelector(".project-names");
     let newProjectOption=document.createElement("option");
     newProjectOption.innerText=newProjectSubmission.get("pro-name");
@@ -124,17 +132,19 @@ newTaskButton.addEventListener("click",(event)=>{
     event.preventDefault();
     let newTaskSubmission=new FormData(newTaskForm);
     makeNewTask(newTaskSubmission);
+    currentTasks=JSON.parse(localStorage.getItem("tasks"));
+    currentTasks=sortTasks(currentTasks);
+    showTasks(currentTasks);
     newTaskDialog.close();
 });
-
-
-let showTasksArea=document.querySelector(".show-tasks-area");
-
-
-let showTasksButton=document.createElement("button");
-showTasksButton.innerText="Show tasks";
-showTasksButton.addEventListener("click",()=>{
-    showTasksArea.remove();
-    showTasks(sortTasks(currentTasks));
+let clearProjects=document.querySelector(".clear-projects");
+clearProjects.addEventListener("click",()=>{
+    localStorage.removeItem("projects");
 });
-showTasksArea.appendChild(showTasksButton);
+let clearTasks=document.querySelector(".clear-tasks");
+clearTasks.addEventListener("click",()=>{
+    localStorage.removeItem("tasks");
+})
+currentTasks=sortTasks(currentTasks);
+showTasks(currentTasks);
+

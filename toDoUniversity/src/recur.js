@@ -3,9 +3,9 @@ import {Task} from "./task.js";
 import {Project} from "./project.js";
 function createRecurringTask(originalTask,startingDate,daysAdded,weeksAdded,monthsAdded,endingDate){
     let newTasks=[];
-    let currentDate=startingDate;
-    let currentTask=originalTask;
-    while(startingDate.getTime()<=endingDate.getTime()){
+    let currentDate=new Date(startingDate);
+    let currentTask=new Task(originalTask);
+    while(currentDate.getTime()<=endingDate.getTime()){
         currentDate=addDays(currentDate,daysAdded);
         currentDate.addWeeks(currentDated,weeksAdded);
         currentDate=addMonths(currentDate,monthsAdded);
