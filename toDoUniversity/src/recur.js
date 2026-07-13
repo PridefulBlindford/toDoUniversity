@@ -3,13 +3,18 @@ import {Task} from "./task.js";
 import {Project} from "./project.js";
 function createRecurringTask(originalTask,startingDate,daysAdded,weeksAdded,monthsAdded,endingDate){
     let newTasks=[];
-    let currentDate=new Date(startingDate);
-    let currentTask=new Task(originalTask);
+    let currentDate=Object.assign({},startingDate);
+    let currentTask=Object.assign({},originalTask);
+    console.log(currentTask);
+    console.log(originalTask);
+    
     while(currentDate.getTime()<=endingDate.getTime()){
         currentDate=addDays(currentDate,daysAdded);
-        currentDate.addWeeks(currentDated,weeksAdded);
+        currentDate=addWeeks(currentDate,weeksAdded);
         currentDate=addMonths(currentDate,monthsAdded);
-        currentTask.setDate(currentDate);
+        currentTask.taskDay=currentDate.getDate();
+        currentTask.taskMonth=currentDate.getMonth();
+        currentTask.taskYear=currentDate.getFullYear();
         newTasks.push(currentTask);
     }
     return newTasks;

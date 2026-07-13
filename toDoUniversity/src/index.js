@@ -24,11 +24,14 @@ function showTasks(currentTasks){
         taskHeading.innerText=`${currentTask.taskName} (${currentTask.taskCompleted?"completed":"not completed"})`;
         taskArea.appendChild(taskHeading);
         let  taskDueDate=document.createElement("p");
+        let taskDate=new Date(parseInt(currentTask.taskYear),parseInt(currentTask.taskMonth),parseInt(currentTask.taskDay));
         
-        taskDueDate.innerText=`Due ${format(new Date(currentTask.taskYear,currentTask.taskMonth,currentTask.taskDay),"MMMM dd, yyyy")} } at ${currentTask.taskHour}:${currentTask.taskMinute}`;
+        let formattedDate=format(taskDate,"MMMM dd, yyyy");
+        
+        taskDueDate.innerText=`Due ${formattedDate} } at ${currentTask.taskHour}:${currentTask.taskMinute}`;
         taskArea.appendChild(taskDueDate);
         let taskInfoArea=document.createElement("details");
-        let infoText=document.createElement("summary");
+        let moreInfo=document.createElement("summary");
         moreInfo.innerText=`More info about ${currentTask.taskName}`;
         taskInfoArea.appendChild(moreInfo);
         let taskDescriptionInfo=document.createElement("p");
@@ -60,7 +63,7 @@ function showTasks(currentTasks){
 
         let taskProjectInfo=document.createElement("p");
         taskProjectInfo.innerText=`Project: ${currentTask.taskProjectName}`;
-        taskArea.appendChild(taskProjectinfo);
+        taskArea.appendChild(taskProjectInfo);
         let removeTaskButton=document.createElement("button");
         removeTaskButton.innerText="Rmove Task";
         removeTaskButton.addEventListener("click",()=>{

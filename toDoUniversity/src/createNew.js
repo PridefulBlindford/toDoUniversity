@@ -19,7 +19,7 @@ function makeNewTask(newTaskData){
     localStorage.setItem("tasks",JSON.stringify(tasks));
     if(newTaskData.get("t-recur")){
         tasks=JSON.parse(localStorage.getItem("tasks"))||[];
-        tasks.push(createRecurringTask(new Date(newTaskData.get("t-year"),newTaskData.get("t-month"),newTaskData.get("t-day")),newTaskData.get("t-day-recur"),newTaskData.get("t-week-recur"),newTaskData.get("t-month-recur"),newDate(newTaskData.get("t-year-end"),newTaskData.get("t-month-end"),newTaskData.get("t-day-end"))));
+        tasks.push(createRecurringTask(newCurrentTask,new Date(parseInt(newTaskData.get("t-year")),parseInt(newTaskData.get("t-month")),parseInt(newTaskData.get("t-day"))),parseInt(newTaskData.get("t-day-recur")),parseInt(newTaskData.get("t-week-recur")),parseInt(newTaskData.get("t-month-recur")),new Date(parseInt(newTaskData.get("t-year-end")),parseInt(newTaskData.get("t-month-end")),parseInt(newTaskData.get("t-day-end")))));
         localStorage.setItem("tasks",JSON.stringify(tasks));
         
     }

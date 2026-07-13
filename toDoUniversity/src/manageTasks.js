@@ -2,9 +2,9 @@ import {Task} from "./task.js";
 import {Project} from "./project.js";
 import {tasks,projects,currentTasks,currentProjects} from "./createNew.js";
 function sortTasksAlgo(firstTask,secondTask){
-let firstTaskDate=new Date(taskYear,taskMonth,taskDay);
-let secondTaskDate=new Date(taskYear,taskMonth,taskDay);
-return (secondTaskDate.getTime()-second.taskPriority)-(firstTaskDate.getTime()-firstTask.taskPriority);
+let firstTaskDate=new Date(firstTask.taskYear,firstTask.taskMonth,firstTask.taskDay);
+let secondTaskDate=new Date(secondTask.taskYear,secondTask.taskMonth,secondTask.taskDay);
+return (secondTaskDate.getTime()-secondTask.taskPriority)-(firstTaskDate.getTime()-firstTask.taskPriority);
 }
 function sortTasks(currentTasks){
     return currentTasks.sort((a,b)=>sortTasksAlgo(a,b));
