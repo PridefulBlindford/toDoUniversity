@@ -12,6 +12,7 @@ function showTasks(currentTasks){
     if(document.querySelector(".tasks-area")!==null){
         document.querySelector(".tasks-area").remove();
     }    
+    currentTasks=JSON.parse(localStorage.getItem("tasks"));
     let tasksArea=document.createElement("div");
     tasksArea.setAttribute("class","tasks-area");
     let mainContent=document.querySelector(".main-content");
@@ -73,14 +74,16 @@ function showTasks(currentTasks){
 }
 let projectDetails=document.querySelector(".project-details");
 function showProjects(){
+    console.log(JSON.parse(localStorage.getItem("projects")));
     if(document.querySelector(".project-area")!==null){
         document.querySelector(".project-area").remove();
     }
+    currentProjects=JSON.parse(localStorage.getItem("projects"));
+    
     let projectArea=document.createElement("div");
     
     projectArea.setAttribute("class","project-area");
     for(let i=0;i<currentProjects.length;i++){
-console.log(currentProjects.length);
         let     newCurrentProject=document.createElement("button");
         newCurrentProject.innerText=currentProjects[i].projectName;
         newCurrentProject.addEventListener("click",()=>{
@@ -93,6 +96,7 @@ console.log(currentProjects.length);
 
 projectDetails.addEventListener("toggle",()=>{
     if(projectDetails.open){
+        currentProjects=JSON.parse(localStorage.getItem("projects"));
         showProjects();
     }
 });
@@ -101,7 +105,7 @@ let newProjectDialog=document.querySelector("#new-project-dialog");
 newProjectButton.addEventListener("click",(event)=>{
     event.preventDefault();
     let newProjectForm=document.querySelector(".new-project-form");  
-    let newProjectSubmission=new FormData(newProjectForm);
+    let newProjectSubmission=new FormData(newProjectForm)
     
     makeNewProject(newProjectSubmission.get("pro-name"));
     
