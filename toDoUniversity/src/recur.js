@@ -1,22 +1,22 @@
 import { addDays ,addWeeks,addMonths} from "date-fns";
 import {Task} from "./task.js";
 import {Project} from "./project.js";
-function createRecurringTask(originalTask,startingDate,daysAdded,weeksAdded,monthsAdded,endingDate){
-    let newTasks=[];
-    let currentDate=Object.assign({},startingDate);
-    let currentTask=Object.assign({},originalTask);
-    console.log(currentTask);
-    console.log(originalTask);
+function createRecurringTask(originalTask,startingDate,daysAdded,weeksAdded,monthsAdded,endingDate,newTasks){
     
-    while(currentDate.getTime()<=endingDate.getTime()){
-        currentDate=addDays(currentDate,daysAdded);
-        currentDate=addWeeks(currentDate,weeksAdded);
-        currentDate=addMonths(currentDate,monthsAdded);
-        currentTask.taskDay=currentDate.getDate();
-        currentTask.taskMonth=currentDate.getMonth();
-        currentTask.taskYear=currentDate.getFullYear();
-        newTasks.push(currentTask);
+    
+    
+    
+    while(startingDate.getTime()<=endingDate.getTime()){
+        startingDate=addDays(startingDate,daysAdded);
+        startingDate=addWeeks(startingDate,weeksAdded);
+        startingDate=addMonths(startingDate,monthsAdded);
+    
+        originalTask.taskDay=startingDate.getDate();
+        console.log(originalTask.taskDay);
+        originalTask.taskMonth=startingDate.getMonth();
+        originalTask.taskYear=startingDate.getFullYear();
+        newTasks.push(originalTask);
     }
-    return newTasks;
+    
 }
 export{createRecurringTask};

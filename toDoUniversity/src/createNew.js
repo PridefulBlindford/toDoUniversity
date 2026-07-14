@@ -19,7 +19,7 @@ function makeNewTask(newTaskData){
     localStorage.setItem("tasks",JSON.stringify(tasks));
     if(newTaskData.get("t-recur")){
         tasks=JSON.parse(localStorage.getItem("tasks"))||[];
-        tasks.push(createRecurringTask(newCurrentTask,new Date(parseInt(newTaskData.get("t-year")),parseInt(newTaskData.get("t-month")),parseInt(newTaskData.get("t-day"))),parseInt(newTaskData.get("t-day-recur")),parseInt(newTaskData.get("t-week-recur")),parseInt(newTaskData.get("t-month-recur")),new Date(parseInt(newTaskData.get("t-year-end")),parseInt(newTaskData.get("t-month-end")),parseInt(newTaskData.get("t-day-end")))));
+        createRecurringTask(newCurrentTask,new Date(parseInt(newTaskData.get("t-year")),parseInt(newTaskData.get("t-month")),parseInt(newTaskData.get("t-day"))),parseInt(newTaskData.get("t-day-recur")),parseInt(newTaskData.get("t-week-recur")),parseInt(newTaskData.get("t-month-recur")),new Date(parseInt(newTaskData.get("t-year-end")),parseInt(newTaskData.get("t-month-end")),parseInt(newTaskData.get("t-day-end"))),tasks);
         localStorage.setItem("tasks",JSON.stringify(tasks));
         
     }

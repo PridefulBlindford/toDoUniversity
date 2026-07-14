@@ -25,7 +25,7 @@ function showTasks(currentTasks){
         taskArea.appendChild(taskHeading);
         let  taskDueDate=document.createElement("p");
         let taskDate=new Date(parseInt(currentTask.taskYear),parseInt(currentTask.taskMonth),parseInt(currentTask.taskDay));
-        
+
         let formattedDate=format(taskDate,"MMMM dd, yyyy");
         
         taskDueDate.innerText=`Due ${formattedDate} } at ${currentTask.taskHour}:${currentTask.taskMinute}`;
@@ -147,6 +147,9 @@ clearProjects.addEventListener("click",()=>{
 let clearTasks=document.querySelector(".clear-tasks");
 clearTasks.addEventListener("click",()=>{
     localStorage.removeItem("tasks");
+    
+     
+     
 })
 currentTasks=sortTasks(currentTasks);
 showTasks(currentTasks);
