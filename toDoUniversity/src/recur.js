@@ -6,16 +6,21 @@ function createRecurringTask(originalTask,startingDate,daysAdded,weeksAdded,mont
     
     
     
+    
+    
     while(startingDate.getTime()<=endingDate.getTime()){
+        let currentTask=structuredClone(originalTask);
         startingDate=addDays(startingDate,daysAdded);
         startingDate=addWeeks(startingDate,weeksAdded);
         startingDate=addMonths(startingDate,monthsAdded);
+        let currentDate=structuredClone(startingDate);
     
-        originalTask.taskDay=startingDate.getDate();
-        console.log(originalTask.taskDay);
-        originalTask.taskMonth=startingDate.getMonth();
-        originalTask.taskYear=startingDate.getFullYear();
-        newTasks.push(originalTask);
+        currentTask.taskDay=currentDate.getDate();
+        
+        
+        currentTask.taskMonth=currentDate.getMonth();
+        currentTask.taskYear=currentDate.getFullYear();
+        newTasks.push(currentTask);
     }
     
 }

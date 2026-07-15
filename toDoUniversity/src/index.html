@@ -31,6 +31,9 @@
         <div>
             <button class="clear-tasks">Clear Tasks</button>
         </div>
+        <div>
+            <button class="show-tasks">Show Tasks</button>
+        </div>
         <h2>Current Tasks</h2>
     <dialog id="new-project-dialog">
         <form action="" method="dialog" class="new-project-form">
@@ -78,11 +81,18 @@
                 </div>
                 <div>
                     <label for="t-hour">What hour of the day is the task due (required)?</label>
-                    <input type="number" name="t-hour" id="t-hour" min="1" max="24" required>
+                    <input type="number" name="t-hour" id="t-hour" min="1" max="12" required>
                 </div>
                 <div>
                     <label for="t-minute">What minute of the hour was the task due (required)?</label>
                     <input type="number" name="t-minute" id="t-minute" min="0" max="59" required>
+                </div>
+                <div>
+                    <label for="t-time-day">What time of day is the task due(required)?</label>
+                    <select name="t-time-day" required>
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
                 </div>
 
             </fieldset>

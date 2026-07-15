@@ -2,6 +2,7 @@ import {Project} from "./project.js";
     class Task{
         taskName;
         taskDescription;
+        taskTimeDay;
         
         taskHour;
         taskMinute;
@@ -11,7 +12,7 @@ import {Project} from "./project.js";
         taskDay;
         taskMonth;
         taskyear;
-    constructor(taskName,taskDescription,taskDay,taskMonth,taskYear,taskHour,taskMinute,taskCompleted,taskProjectName,taskPriority){
+    constructor(taskName,taskDescription,taskDay,taskMonth,taskYear,taskHour,taskMinute,taskCompleted,taskProjectName,taskPriority,taskTimeDay){
         this.taskName=taskName;
         this.taskDescription=taskDescription;
         this.taskDay=taskDay;
@@ -22,6 +23,7 @@ import {Project} from "./project.js";
         this.taskCompleted=taskCompleted;
         this.taskProjectName=taskProjectName;
         this.taskPriority=taskPriority;
+        this.taskTimeDay=taskTimeDay;
     }
 
     

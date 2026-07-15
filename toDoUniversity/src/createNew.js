@@ -13,7 +13,7 @@ function makeNewProject(newProjectName){
 }
 
 function makeNewTask(newTaskData){
-    let newCurrentTask=new Task(newTaskData.get("t-name"),newTaskData.get("t-description"),newTaskData.get("t-day"),newTaskData.get("t-month"),newTaskData.get("t-year"),newTaskData.get("t-hour"),newTaskData.get("t-minute"),newTaskData.get("t-completed"),newTaskData.get("t-pro-name"),newTaskData.get("t-priority"));
+    let newCurrentTask=new Task(newTaskData.get("t-name"),newTaskData.get("t-description"),newTaskData.get("t-day"),newTaskData.get("t-month"),newTaskData.get("t-year"),newTaskData.get("t-hour"),newTaskData.get("t-minute"),newTaskData.get("t-completed"),newTaskData.get("t-pro-name"),newTaskData.get("t-priority"),newTaskData.get("t-time-day"));
     tasks=JSON.parse(localStorage.getItem("tasks"))||[];
     tasks.push(newCurrentTask);
     localStorage.setItem("tasks",JSON.stringify(tasks));

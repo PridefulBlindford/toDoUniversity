@@ -27,8 +27,7 @@ function showTasks(currentTasks){
         let taskDate=new Date(parseInt(currentTask.taskYear),parseInt(currentTask.taskMonth),parseInt(currentTask.taskDay));
 
         let formattedDate=format(taskDate,"MMMM dd, yyyy");
-        
-        taskDueDate.innerText=`Due ${formattedDate} } at ${currentTask.taskHour}:${currentTask.taskMinute}`;
+taskDueDate.innerText=`Due ${formattedDate} at ${currentTask.taskHour}:${currentTask.taskMinute}${parseInt(currentTask.taskMinute)===0?"0":""} ${currentTask.taskTimeDay}`;
         taskArea.appendChild(taskDueDate);
         let taskInfoArea=document.createElement("details");
         let moreInfo=document.createElement("summary");
@@ -65,9 +64,9 @@ function showTasks(currentTasks){
         taskProjectInfo.innerText=`Project: ${currentTask.taskProjectName}`;
         taskArea.appendChild(taskProjectInfo);
         let removeTaskButton=document.createElement("button");
-        removeTaskButton.innerText="Rmove Task";
+        removeTaskButton.innerText="Remove Task";
         removeTaskButton.addEventListener("click",()=>{
-            document.querySelector(`.${currentTask.taskName}`).remove();
+            
             currentTasks=removeTask(currentTasks,currentTask.taskName);
             showTasks(currentTasks);
             localStorage.setItem("tasks",JSON.stringify(currentTasks));
@@ -83,7 +82,7 @@ let projectDetails=document.querySelector(".project-details");
 function showProjects(){
     
     if(document.querySelector(".project-area")!==null){
-        document.querySelector(".project-area").remove();
+        document.querySelector(".project-area").remove;
     }
     currentProjects=JSON.parse(localStorage.getItem("projects"));
     
@@ -105,9 +104,13 @@ function showProjects(){
 }
 
 projectDetails.addEventListener("toggle",()=>{
-    if(projectDetails.open){
-        currentProjects=JSON.parse(localStorage.getItem("projects"));
-        showProjects();
+    try{
+        if(projectDetails.open){
+            currentProjects=JSON.parse(localStorage.getItem("projects"));
+            showProjects();
+        }
+    } catch {
+        alert("There are currently no projects. Try creating a project before showing them.");
     }
 });
 let newProjectButton=document.querySelector(".new-project-button");
@@ -120,11 +123,6 @@ newProjectButton.addEventListener("click",(event)=>{
     makeNewProject(newProjectSubmission.get("pro-name"));
     
     
-    
-    let projectSelection=document.querySelector(".project-names");
-    let newProjectOption=document.createElement("option");
-    newProjectOption.innerText=newProjectSubmission.get("pro-name");
-    projectSelection.appendChild(newProjectOption);
     
     newProjectDialog.close();
 });
@@ -151,6 +149,34 @@ clearTasks.addEventListener("click",()=>{
      
      
 })
-currentTasks=sortTasks(currentTasks);
-showTasks(currentTasks);
 
+let showTasksButton=document.querySelector(".show-tasks");
+showTasksButton.addEventListener("click",()=>{
+    try{
+        currentTasks=JSON.parse(localStorage.getItem("tasks"))||[];
+        currentTasks=sortTasks(currentTasks);
+        showTasks(currentTasks);
+    } catch{
+        alert("There are currently no tasks. Try creating a task before showing them.");
+    }
+
+});
+let   createTaskButton=document.querySelector(".new-task");
+createTaskButton.addEventListener("click",()=>{
+    let projectSelection=document.querySelector(".project-names");
+    if(document.querySelector(".project-options-area")){
+        document.querySelector(".project-areas-option").remove;
+    }
+    let projectOptionsArea=document.createElement("div");
+    projectOptionsArea.setAttribute("class","project-options-area");
+    let projectOptions=JSON.parse(localStorage.getItem("projects"));
+    projectOptions.forEach((projectOption)=>{
+
+    
+        let newProjectOption=document.createElement("option");
+        newProjectOption.innerText=projectOption.projectName;
+        projectOptionsArea.appendChild(newProjectOption);
+    });
+    projectSelection.appendChild(projectOptionsArea);
+    
+})
