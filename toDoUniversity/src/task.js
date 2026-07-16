@@ -20,24 +20,12 @@ import {Project} from "./project.js";
         this.taskYear=taskYear;
         this.taskHour=taskHour;
         this.taskMinute=taskMinute;
-        this.taskCompleted=taskCompleted;
+        this.taskCompleted=taskCompleted?"yes":"no";
         this.taskProjectName=taskProjectName;
         this.taskPriority=taskPriority;
         this.taskTimeDay=taskTimeDay;
     }
-
-    
-    changeTaskCompleted(taskCompletedValue) {
-        if(taskCompletedValue){
-            this.taskCompleted=false;
-        }
-        else{
-            this.taskCompleted=true;
-        }
-    }
-    changeTaskPriority(taskPriorityValue){
-        this.taskPriority=taskPriorityValue;
     }
     
-}
+ 
 export {Task};

@@ -10,7 +10,13 @@ function sortTasks(currentTasks){
     return currentTasks.sort((a,b)=>sortTasksAlgo(a,b));
 }
 function filterTasks(currentTasks,projectName){
-    return currentTasks.filter((currentTask)=> currentTask.taskProjectName===projectName);
+    let filteredTasks=[];
+    currentTasks.forEach((currentTask)=>{
+        if(currentTask.taskProjectName===projectName){
+            filteredTasks.push(currentTask);
+        }
+    });
+    return filteredTasks;
 }
 function removeTask(currentTasks,removedTask){
     return currentTasks.filter((currentTask)=>currentTask!==removedTask);

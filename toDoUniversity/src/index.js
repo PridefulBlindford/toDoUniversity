@@ -37,13 +37,23 @@ taskDueDate.innerText=`Due ${formattedDate} at ${currentTask.taskHour}:${current
         taskDescriptionInfo.innerText=`Task Description: ${currentTask.taskDescription}`;
         taskInfoArea.appendChild(taskDescriptionInfo);
         let taskCompletedInfo=document.createElement("p");
-        taskCompletedInfo.innerText=`Task Completed: ${currentTask.taskCompleted?"yes":"no"}`;
+        taskCompletedInfo.innerText=`Task Completed: ${currentTask.taskCompleted}`;
         taskInfoArea.appendChild(taskCompletedInfo);
         let taskCompButton=document.createElement("button");
         taskCompButton.innerText="Change Task Completed Status";
         taskCompButton.addEventListener("click",()=>{
-            currentTask.changeTaskCompleted(currentTask.taskCompleted);
-            taskCompletedInfo.innerText=`Task Completed: ${currentTask.taskCompleted?"yes":"no"}`;
+            if(currentTask.taskCompeleted==="yes"){
+                currentTask.taskCompleted="no";
+                taskCompletedInfo.innerText=`Task Completed: ${currentTask.taskCompleted}`;
+                localStorage.setItem("tasks",JSON.stringify(currentTasks));
+
+            }
+            else{
+                currentTask.taskCompleted="yes";
+                taskCompletedInfo.innerText=`Task Completed: ${currentTask.taskCompleted}`;
+                localStorage.setItem("tasks",JSON.stringify(currentTasks));
+
+            }
         });
         taskInfoArea.appendChild(taskCompButton);
         let taskPriorityInfo=document.createElement("p");
@@ -53,8 +63,9 @@ taskDueDate.innerText=`Due ${formattedDate} at ${currentTask.taskHour}:${current
         taskPrioButton.innerText="Change Task Priority Level";
         taskPrioButton.addEventListener("click",()=>{
             let prioLevelInput=parseInt(prompt("Please input a new priority level",currentTask.taskPriority));
-            currentTask.changeTaskPriority(prioLevelInput);
+            currentTask.taskPriority=prioLevelInput;
             taskPriorityInfo.innerText=`Priority Level: ${currentTask.taskPriority}`;
+            localStorage.setItem("tasks",JSON.stringify(currentTasks));
         });
         taskInfoArea.appendChild(taskPrioButton);
         taskArea.appendChild(taskInfoArea);
@@ -81,25 +92,27 @@ taskDueDate.innerText=`Due ${formattedDate} at ${currentTask.taskHour}:${current
 let projectDetails=document.querySelector(".project-details");
 function showProjects(){
     
-    if(document.querySelector(".project-area")!==null){
-        document.querySelector(".project-area").remove;
-    }
+    
+    document.querySelector(".project-area").remove;
+    
     currentProjects=JSON.parse(localStorage.getItem("projects"));
     
     let projectArea=document.createElement("div");
     
     projectArea.setAttribute("class","project-area");
-    for(let i=0;i<currentProjects.length;i++){
+    currentProjects.forEach((currentProject)=>{
         let     newCurrentProject=document.createElement("button");
-        newCurrentProject.innerText=currentProjects[i].projectName;
+        newCurrentProject.innerText=currentProject.projectName;
         newCurrentProject.addEventListener("click",()=>{
             currentTasks=JSON.parse(localStorage.getItem("tasks"));
             currentTasks=sortTasks(currentTasks);
-            currentTasks=filterTasks(currentTasks,currentProjects[i].projectName);
+            console.log(currentProject.projectName);
+            currentTasks=filterTasks(currentTasks,currentProject.projectName);
+            
             showTasks(currentTasks);
         });
         projectArea.appendChild(newCurrentProject);
-    }
+    });
     projectDetails.appendChild(projectArea);
 }
 
