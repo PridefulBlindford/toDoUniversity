@@ -42,7 +42,7 @@ taskDueDate.innerText=`Due ${formattedDate} at ${currentTask.taskHour}:${current
         let taskCompButton=document.createElement("button");
         taskCompButton.innerText="Change Task Completed Status";
         taskCompButton.addEventListener("click",()=>{
-            currentTask.changeTaskCompleted();
+            currentTask.changeTaskCompleted(currentTask.taskCompleted);
             taskCompletedInfo.innerText=`Task Completed: ${currentTask.taskCompleted?"yes":"no"}`;
         });
         taskInfoArea.appendChild(taskCompButton);
@@ -53,7 +53,7 @@ taskDueDate.innerText=`Due ${formattedDate} at ${currentTask.taskHour}:${current
         taskPrioButton.innerText="Change Task Priority Level";
         taskPrioButton.addEventListener("click",()=>{
             let prioLevelInput=parseInt(prompt("Please input a new priority level",currentTask.taskPriority));
-            currentTask.changePriorityLevel(prioLevelInput);
+            currentTask.changeTaskPriority(prioLevelInput);
             taskPriorityInfo.innerText=`Priority Level: ${currentTask.taskPriority}`;
         });
         taskInfoArea.appendChild(taskPrioButton);

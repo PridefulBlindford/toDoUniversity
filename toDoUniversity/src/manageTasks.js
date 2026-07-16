@@ -4,7 +4,7 @@ import {tasks,projects,currentTasks,currentProjects} from "./createNew.js";
 function sortTasksAlgo(firstTask,secondTask){
 let firstTaskDate=new Date(firstTask.taskYear,firstTask.taskMonth,firstTask.taskDay);
 let secondTaskDate=new Date(secondTask.taskYear,secondTask.taskMonth,secondTask.taskDay);
-return (secondTaskDate.getTime()-secondTask.taskPriority)-(firstTaskDate.getTime()-firstTask.taskPriority);
+return (firstTaskDate.getTime()-firstTask.taskPriority)-(secondTaskDate.getTime()-secondTask.taskPriority);
 }
 function sortTasks(currentTasks){
     return currentTasks.sort((a,b)=>sortTasksAlgo(a,b));

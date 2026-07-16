@@ -27,12 +27,12 @@ import {Project} from "./project.js";
     }
 
     
-     changeTaskCompleted(taskCompletedValue) {
+    changeTaskCompleted(taskCompletedValue) {
         if(taskCompletedValue){
-            this.taskCompleted=true;
+            this.taskCompleted=false;
         }
         else{
-            this.taskCompleted=false;
+            this.taskCompleted=true;
         }
     }
     changeTaskPriority(taskPriorityValue){
