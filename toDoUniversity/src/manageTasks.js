@@ -13,6 +13,6 @@ function filterTasks(currentTasks,projectName){
     return currentTasks.filter((currentTask)=> currentTask.taskProjectName===projectName);
 }
 function removeTask(currentTasks,removedTask){
-    return currentTasks.filter((currentTask)=>currentTask.taskName!==removedTask);
+    return currentTasks.filter((currentTask)=>currentTask!==removedTask);
 }
 export{sortTasksAlgo,sortTasks,filterTasks,removeTask};

@@ -10,10 +10,10 @@ let currentProjects=[];
 currentProjects=JSON.parse(localStorage.getItem("projects"));
 function showTasks(currentTasks){
 
-    if(document.querySelector(".tasks-area")!==null){
-        document.querySelector(".tasks-area").remove();
-    }    
-    currentTasks=JSON.parse(localStorage.getItem("tasks"));
+    
+    document.querySelector(".tasks-area").remove();
+        
+    
     let tasksArea=document.createElement("div");
     tasksArea.setAttribute("class","tasks-area");
     let mainContent=document.querySelector(".main-content");
@@ -67,7 +67,7 @@ taskDueDate.innerText=`Due ${formattedDate} at ${currentTask.taskHour}:${current
         removeTaskButton.innerText="Remove Task";
         removeTaskButton.addEventListener("click",()=>{
             
-            currentTasks=removeTask(currentTasks,currentTask.taskName);
+            currentTasks=removeTask(currentTasks,currentTask);
             showTasks(currentTasks);
             localStorage.setItem("tasks",JSON.stringify(currentTasks));
             });
@@ -164,9 +164,7 @@ showTasksButton.addEventListener("click",()=>{
 let   createTaskButton=document.querySelector(".new-task");
 createTaskButton.addEventListener("click",()=>{
     let projectSelection=document.querySelector(".project-names");
-    if(document.querySelector(".project-options-area")){
-        document.querySelector(".project-areas-option").remove;
-    }
+    document.querySelector(".project-options-area").remove();
     let projectOptionsArea=document.createElement("div");
     projectOptionsArea.setAttribute("class","project-options-area");
     let projectOptions=JSON.parse(localStorage.getItem("projects"));
